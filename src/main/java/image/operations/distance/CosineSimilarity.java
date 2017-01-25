@@ -13,7 +13,7 @@ import java.util.List;
  */
 public class CosineSimilarity {
 
-  public ArrayList getSimilarityLİst (List<ArrayList> descriptor_list, KeyPoint[] keypoints) {
+  public ArrayList getSimilarityList (List<ArrayList> descriptor_list, KeyPoint[] keypoints) {
 
         double[][] angles = new double[descriptor_list.size()][descriptor_list.size()];
 

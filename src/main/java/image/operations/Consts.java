@@ -1,15 +1,24 @@
 package image.operations;
 
 /**
- * Created by Oda114 on 6.12.2016.
+ * <h1>Constants</h1>
+ *
+ * Constants of the project
+ *
+ * @author  alim
+ * @version 1.0
+ * @since   6.12.2016
  */
 public class Consts {
 
-    /**
-     * Image path
+   /**
+     * {@value #IMAGE_PATH} Holds the path of the images
      */
-    //public static final String IMAGE_PATH = "C:\\Users\\User\\Desktop\\JavaOpenCv1-master\\Pictures\\028_F.png";
     public static final String IMAGE_PATH = "C:\\Users\\User\\Desktop\\JavaOpenCv1-master\\Pictures\\028_F.png";
+
+    /**
+     * {@value #IMAGE_PATH_OUTPUT} Holds the path of the output image
+     */
     public static final String IMAGE_PATH_OUTPUT = "C:\\Users\\User\\Desktop\\JavaOpenCv1-master\\Pictures\\098_F_OUTPUT.jpg";
 
 
