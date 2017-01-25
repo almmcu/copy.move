@@ -26,6 +26,7 @@ public class KeyPointDetector {
     private List<ArrayList> descriptor_list;//  128 bit desriptors list
     private Mat objectImage;
 
+
     /**
      * This method is used to detect image key points and their descriptors.
      * SIFT algorithm is applied on an image to detect the key points
