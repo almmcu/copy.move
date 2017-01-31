@@ -25,7 +25,8 @@ public class KeyPointDetector {
 
     private List<ArrayList> descriptor_list;//  128 bit desriptors list
     private Mat objectImage;
-
+    private String OutputImage = Consts.absolutePath.concat(Consts.IMAGE_PATH_OUTPUT_028);
+    private String InputImage = Consts.absolutePath.concat(Consts.IMAGE_PATH_028);
 
     /**
      * This method is used to detect image key points and their descriptors.
@@ -35,7 +36,7 @@ public class KeyPointDetector {
     public void detectKeyPoint(){
         System.out.println("Started....");
         System.out.println("Loading images...");
-        objectImage = Highgui.imread(Consts.IMAGE_PATH, Highgui.CV_LOAD_IMAGE_COLOR);
+        objectImage = Highgui.imread(InputImage, Highgui.CV_LOAD_IMAGE_COLOR);
 
         MatOfKeyPoint objectKeyPoints = new MatOfKeyPoint();
         FeatureDetector featureDetector = FeatureDetector.create(FeatureDetector.SIFT);
@@ -92,7 +93,7 @@ public class KeyPointDetector {
         System.out.println("Drawing key points on object image...");
         Features2d.drawKeypoints(objectImage, objectKeyPoints, outputImage, newKeypointColor, 0);
         //Features2d.drawMatches2(objectImage,);
-        Highgui.imwrite(Consts.IMAGE_PATH_OUTPUT, outputImage);
+        Highgui.imwrite(OutputImage, outputImage);
 
 
         System.out.println("Writing output image...");

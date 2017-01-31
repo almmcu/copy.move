@@ -1,3 +1,4 @@
+import image.operations.Consts;
 import image.operations.keypoint.KeyPointDetector;
 import org.opencv.core.*;
 
@@ -22,6 +23,7 @@ public class Test {
         mc5.setTo(new Scalar(5));
         System.out.println("OpenCV Mat data:\n" + m.dump());
 
+        String a = Consts.absolutePath;
         KeyPointDetector keyPointDetector = new KeyPointDetector();
         keyPointDetector.detectKeyPoint();
 

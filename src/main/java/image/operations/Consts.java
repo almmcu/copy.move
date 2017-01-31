@@ -1,5 +1,7 @@
 package image.operations;
 
+import java.io.File;
+
 /**
  * <h1>Constants</h1>
  *
@@ -11,36 +13,71 @@ package image.operations;
  */
 public class Consts {
 
+
+ /**
+  * {absolutePath} gets the absolute path of the project
+  */
+  public static String absolutePath = new File("").getAbsolutePath();
+
    /**
-     * {@value #IMAGE_PATH} Holds the path of the images
+     * {@value #IMAGE_PATH_098} Holds the path of the images
+     * CoMoFod picture number 98 - Birds
      */
-    public static final String IMAGE_PATH = "C:\\Users\\User\\Desktop\\JavaOpenCv1-master\\Pictures\\028_F.png";
+    public static final String IMAGE_PATH_098 =  "\\Pictures\\098_F.png";
 
     /**
-     * {@value #IMAGE_PATH_OUTPUT} Holds the path of the output image
+     * {@value #IMAGE_PATH_OUTPUT_098} Holds the path of the output image
+     * CoMoFod picture number 98 - Birds
      */
-    public static final String IMAGE_PATH_OUTPUT = "C:\\Users\\User\\Desktop\\JavaOpenCv1-master\\Pictures\\098_F_OUTPUT.jpg";
+    public static final String IMAGE_PATH_OUTPUT_098 = "\\Pictures\\OUTPUT_098_F.jpg";
 
 
+     /**
+      * {@value #IMAGE_PATH_028} Holds the path of the images
+      * CoMoFod picture number 28 - Plants
+      */
+     public static final String IMAGE_PATH_028 =  "\\Pictures\\028_F.png";
 
-    public static final String IMAGE_PATH_2 = "C:\\Users\\Oda\\Desktop\\ICCESEN_2016_Pictures\\2.jpg";
-    public static final String IMAGE_PATH_2_1 = "C:\\Users\\Oda\\Desktop\\deney\\resim1\\1.jpg";
-    public static final String IMAGE_PATH_2_1_FORGERY = "C:\\Users\\Ali\\Desktop\\JavaOpenCv1\\Camera\\4_forgery.jpg";
-    public static final String IMAGE_PATH_2_2 = "C:\\Users\\Oda\\Desktop\\deney\\resim1\\2.jpg";
-    public static final String IMAGE_PATH_2_3 = "C:\\Users\\Oda\\Desktop\\deney\\resim1\\3.jpg";
-
-
-    public static final String IMAGE_PATH_OUTPUT_2_1 = "C:\\Users\\Ali\\Desktop\\JavaOpenCv1\\Camera\\4_Output.jpg";
-    public static final String IMAGE_PATH_OUTPUT_2_2 = "C:\\Users\\Ali\\Desktop\\JavaOpenCv1\\Camera\\4_Output1.jpg";
-    public static final String IMAGE_PATH_OUTPUT_2_3 = "C:\\Users\\Oda\\Desktop\\deney\\resim1\\3_Output.jpg";
-
-
-    public static final String IMAGE_PATH_028_F = "C:\\Users\\Ali\\Desktop\\JavaOpenCv1\\Camera\\098_F.png";
-    public static final String IMAGE_PATH_028_F_OUTPUT = "C:\\Users\\Ali\\Desktop\\JavaOpenCv1\\Camera\\098_F_Output.png";
+     /**
+      * {@value #IMAGE_PATH_OUTPUT_028} Holds the path of the output image
+      * CoMoFod picture number 28 - Plants
+      */
+     public static final String IMAGE_PATH_OUTPUT_028 = "\\Pictures\\OUTPUT_028_F.jpg";
 
 
+   /**
+     * {@value #IMAGE_PATH_018} Holds the path of the images
+     * Picture number 18 - Cars
+     */
+    public static final String IMAGE_PATH_018 =  "\\Pictures\\018_F.jpg";
 
     /**
+     * {@value #IMAGE_PATH_OUTPUT_018} Holds the path of the output image
+     * Picture number 18 - Cars
+
+     */
+    public static final String IMAGE_PATH_OUTPUT_018 = "\\Pictures\\OUTPUT_018_F.jpg";
+
+
+     /**
+      * {@value #IMAGE_PATH_048} Holds the path of the images
+      * Picture number 48 - Guns
+      */
+     public static final String IMAGE_PATH_048 =  "\\Pictures\\048_F.jpg";
+
+     /**
+      * {@value #IMAGE_PATH_OUTPUT_048} Holds the path of the output image
+      * Picture number 48 - Guns
+      */
+     public static final String IMAGE_PATH_OUTPUT_048 = "\\Pictures\\OUTPUT_048_F.jpg";
+
+    /**
+      * {@value #IMAGE_PATH_OUTPUT} Holds the path of the output image
+      */
+     public static final String IMAGE_PATH_OUTPUT = "\\Pictures\\OUTPUT_000_F.jpg";
+
+
+ /**
      The caller references the constants using <tt>Consts.EMPTY_STRING</tt>,
      and so on. Thus, the caller should be prevented from constructing objects of
      this class, by declaring this private constructor.
