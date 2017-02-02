@@ -19,17 +19,28 @@ public class Consts {
   */
   public static String absolutePath = new File("").getAbsolutePath();
 
+    /**
+     * {@value #IMAGE_PATH} Holds the path of the inpu image
+     * {@value #IMAGE_PATH_OUTPUT} Holds the path of the output image
+     */
+    public static final String IMAGE_PATH = "\\Pictures\\068_F.jpg";
+
+    public static final String IMAGE_PATH_OUTPUT = "\\Pictures\\OUTPUT_000_F.jpg";
+
    /**
      * {@value #IMAGE_PATH_098} Holds the path of the images
      * CoMoFod picture number 98 - Birds
      */
     public static final String IMAGE_PATH_098 =  "\\Pictures\\098_F.png";
 
-    /**
+
+ /**
      * {@value #IMAGE_PATH_OUTPUT_098} Holds the path of the output image
      * CoMoFod picture number 98 - Birds
      */
     public static final String IMAGE_PATH_OUTPUT_098 = "\\Pictures\\OUTPUT_098_F.jpg";
+    public static final String IMAGE_PATH_OUTPUT_098_C = "\\Pictures\\OUTPUT_098_F_C.jpg";
+
 
 
      /**
@@ -71,10 +82,6 @@ public class Consts {
       */
      public static final String IMAGE_PATH_OUTPUT_048 = "\\Pictures\\OUTPUT_048_F.jpg";
 
-    /**
-      * {@value #IMAGE_PATH_OUTPUT} Holds the path of the output image
-      */
-     public static final String IMAGE_PATH_OUTPUT = "\\Pictures\\OUTPUT_000_F.jpg";
 
 
  /**

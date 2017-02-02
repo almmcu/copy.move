@@ -36,7 +36,9 @@ public class CosineSimilarity {
                 double cos = num / dense;
                 angles[i][j] = Math.acos(cos);
                 if (angles[i][j] == 0) angles[i][j]=Double.MAX_VALUE;
-               if (cos < 0.6) continue;
+                /*
+
+                if (cos < 0.6) continue;
                 Angles angle = new Angles();
                 angle.setAngle(angles[i][j]);
                 angle.setPoint1(i);
@@ -46,7 +48,7 @@ public class CosineSimilarity {
                 angle.setP2(new Point(keypoints[j].pt.x, keypoints[j].pt.y));
 
                 points_angles_list.add(angle);
-
+*/
             }
             }
       return getSimilarity(angles, descriptor_list.size());

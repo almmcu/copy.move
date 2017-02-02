@@ -1,6 +1,7 @@
 package image.operations.keypoint;
 
 import image.operations.Consts;
+import image.operations.distance.CosineSimilarity2;
 import image.operations.distance.VecorSimilarities;
 import image.operations.distance.CosineSimilarity;
 import image.operations.model.Angles;
@@ -23,10 +24,16 @@ import java.util.*;
 public class KeyPointDetector {
     static{ System.loadLibrary(Core.NATIVE_LIBRARY_NAME); }
 
-    private List<ArrayList> descriptor_list;//  128 bit desriptors list
-    private Mat objectImage;
-    private String OutputImage = Consts.absolutePath.concat(Consts.IMAGE_PATH_OUTPUT_028);
-    private String InputImage = Consts.absolutePath.concat(Consts.IMAGE_PATH_028);
+    private List<ArrayList> descriptor_list;//  128 bit descriptors list
+    public static Mat objectImage;
+
+    private String inputImagePath = Consts.absolutePath.concat(Consts.IMAGE_PATH_048 ); // Input Image Path
+    private String outputImagePath = Consts.absolutePath.concat(Consts.IMAGE_PATH_OUTPUT_048 ); // Output Image Path
+
+    // 0 for Cosine Similarity,
+    // 1 for Euclidean Distance,
+    // others for Cosine Similarity 2 (with the threshold 0.6 )
+    private int distance = 2;
 
     /**
      * This method is used to detect image key points and their descriptors.
@@ -36,10 +43,10 @@ public class KeyPointDetector {
     public void detectKeyPoint(){
         System.out.println("Started....");
         System.out.println("Loading images...");
-        objectImage = Highgui.imread(InputImage, Highgui.CV_LOAD_IMAGE_COLOR);
+        objectImage = Highgui.imread(inputImagePath, Highgui.CV_LOAD_IMAGE_COLOR);
 
         MatOfKeyPoint objectKeyPoints = new MatOfKeyPoint();
-        FeatureDetector featureDetector = FeatureDetector.create(FeatureDetector.SIFT);
+        FeatureDetector featureDetector = FeatureDetector.create(FeatureDetector.FAST);
         System.out.println("Detecting key points...");
         featureDetector.detect(objectImage, objectKeyPoints);
         KeyPoint[] keypoints = objectKeyPoints.toArray();
@@ -53,10 +60,10 @@ public class KeyPointDetector {
 
 
         KeyPoint[] descpriptors = objectDescriptors.toArray();
-        System.out.println("descpriptors = " + descpriptors);;
+        System.out.println("descriptors = " + descpriptors);;
 
         Size ketP = objectKeyPoints.size();
-        System.out.println("Keypoint number:  "+ketP);
+        System.out.println("Key point number:  "+ketP);
 
         Size desc = objectDescriptors.size();
         System.out.println("Descriptor size:  "+desc);
@@ -64,36 +71,34 @@ public class KeyPointDetector {
         String[] mat_dump = objectDescriptors.dump().split(";");
 
         // Descriptor leri array liste aktar
-        System.out.println("Getting decriptor vector list...");
+        System.out.println("Getting descriptor vector list...");
         getDescriptorList (mat_dump);
 
 
         /*
          *
-         * Computing Cosine Similarity...
+         * Computing Cosine Similarities 1 or 2
+         * or
+         * Computing Euclidean distance
+         * for Matching
          *
          * */
 
-        //System.out.println("Computing Cosine Similarity...");
-        //System.out.println("Cosine Similarity match point number = " + cosineSimilarity(descriptor_list, keypoints) );
-
-    /*
-    * Computing Similarity using Euclidean distance...
-    */
-
-        System.out.println("Computing Similarity using Euclidean distance...");
-        System.out.println("Euclidean distance match point number = " + euclideanDistance(descriptor_list, keypoints) );
-
-
-
+        if (distance == 0)
+            System.out.println("Cosine Similarity match point number = " + cosineSimilarity(descriptor_list, keypoints) );
+        else if (distance == 1)
+            System.out.println("Euclidean distance match point number = " + euclideanDistance(descriptor_list, keypoints) );
+        else
+            System.out.println("Cosine Similarity match point number = " + cosineSimilarity2(descriptor_list, keypoints) );
         Mat outputImage = new Mat(objectImage.rows(), objectImage.cols(), Highgui.CV_LOAD_IMAGE_COLOR);
         Scalar newKeypointColor = new Scalar(255, 0, 0);
 
 
         System.out.println("Drawing key points on object image...");
-        Features2d.drawKeypoints(objectImage, objectKeyPoints, outputImage, newKeypointColor, 0);
+        //Features2d.drawKeypoints(objectImage, objectKeyPoints, outputImage, newKeypointColor, 0);
         //Features2d.drawMatches2(objectImage,);
-        Highgui.imwrite(OutputImage, outputImage);
+        //Highgui.imwrite(outputImagePath, outputImage);
+        Highgui.imwrite(outputImagePath, objectImage);
 
 
         System.out.println("Writing output image...");
@@ -113,8 +118,28 @@ public class KeyPointDetector {
      */
     private int cosineSimilarity(List<ArrayList> descriptor_list, KeyPoint[] keypoints){
 
+        System.out.println("Computing Cosine Similarity...");
         CosineSimilarity cosineSimilarity =  new CosineSimilarity();
         return appyRansac( cosineSimilarity.getSimilarityList(descriptor_list, keypoints), keypoints);
+    }
+
+    /**
+     * <h1>Similarity Matrix Calculation using Cosine Similarity (with the threshold 0.6 )</h1>
+     *
+     * This method is used to find the similarities of one key point to
+     * all the other key points.
+     * Vectors similarities is detected by using Cosine Similarity
+     *
+     * @param descriptor_list Vektor description of the key points. Vector size is 128
+     * @param keypoints Key points detected by the SIFT algorithm
+     * @return int This returns the number of similar key points
+     *             that represent the copy move forgery region
+     */
+    private int cosineSimilarity2(List<ArrayList> descriptor_list, KeyPoint[] keypoints){
+
+        System.out.println("Computing Cosine Similarity (with the threshold 0.6 ) ...");
+        CosineSimilarity2 cosineSimilarity2 =  new CosineSimilarity2();
+        return cosineSimilarity2.getSimilarityList(descriptor_list, keypoints);
     }
 
     /**
@@ -131,6 +156,7 @@ public class KeyPointDetector {
      */
     private int euclideanDistance(List<ArrayList> descriptor_list, KeyPoint[] keypoints){
 
+        System.out.println("Computing Similarity using Euclidean distance...");
         VecorSimilarities vecorSimilarities = new VecorSimilarities();
         return appyRansac(vecorSimilarities.similarityMatrix(descriptor_list), keypoints);
     }
@@ -172,14 +198,14 @@ public class KeyPointDetector {
         int matchPointNumber = 0;
         for (int i = 0; i < pts1.size(); i++) {
             if (outputMask.get(i, 0)[0] == 0.0) continue;
-                Core.line(
-                        objectImage,
-                        pts1.get(i),
-                        pts2.get(i),
-                        new Scalar(64, 16, 128)
-                );
+            Core.line(
+                    objectImage,
+                    pts1.get(i),
+                    pts2.get(i),
+                    new Scalar(64, 16, 128)
+            );
             //System.out.println(pts1.get(i) + "     "+ pts2.get(i));
-                matchPointNumber++;
+            matchPointNumber++;
 
         }
         return matchPointNumber;
