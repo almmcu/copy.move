@@ -4,7 +4,6 @@ import image.operations.Consts;
 import image.operations.distance.CosineSimilarity2;
 import image.operations.distance.VecorSimilarities;
 import image.operations.distance.CosineSimilarity;
-import image.operations.model.Angles;
 import org.opencv.core.Core;
 import org.opencv.calib3d.Calib3d;
 import org.opencv.core.*;
@@ -27,8 +26,8 @@ public class KeyPointDetector {
     private List<ArrayList> descriptor_list;//  128 bit descriptors list
     public static Mat objectImage;
 
-    private String inputImagePath = Consts.absolutePath.concat(Consts.IMAGE_PATH_048 ); // Input Image Path
-    private String outputImagePath = Consts.absolutePath.concat(Consts.IMAGE_PATH_OUTPUT_048 ); // Output Image Path
+    private String inputImagePath = Consts.absolutePath.concat(Consts.IMAGE_PATH_018 ); // Input Image Path
+    private String outputImagePath = Consts.absolutePath.concat(Consts.IMAGE_PATH_OUTPUT_018 ); // Output Image Path
 
     // 0 for Cosine Similarity,
     // 1 for Euclidean Distance,
@@ -83,13 +82,24 @@ public class KeyPointDetector {
          * for Matching
          *
          * */
+        int matchPointNumber=0;
 
-        if (distance == 0)
-            System.out.println("Cosine Similarity match point number = " + cosineSimilarity(descriptor_list, keypoints) );
-        else if (distance == 1)
-            System.out.println("Euclidean distance match point number = " + euclideanDistance(descriptor_list, keypoints) );
-        else
-            System.out.println("Cosine Similarity match point number = " + cosineSimilarity2(descriptor_list, keypoints) );
+        if (distance == 0){
+            matchPointNumber = cosineSimilarity(descriptor_list, keypoints);
+            System.out.println("Cosine Similarity match point number = " +  matchPointNumber);
+            outputImagePath += "_C_" + matchPointNumber + ".jpg";
+        }
+        else if (distance == 1) {
+            matchPointNumber = euclideanDistance(descriptor_list, keypoints);
+            System.out.println("Euclidean distance match point number = " + +  matchPointNumber);
+            outputImagePath += "_O_" + matchPointNumber + ".jpg";
+        }
+        else {
+            matchPointNumber = cosineSimilarity2(descriptor_list, keypoints);
+            System.out.println("Cosine Similarity match point number = " + matchPointNumber);
+            outputImagePath += "_C2_" + matchPointNumber + ".jpg";
+        }
+
         Mat outputImage = new Mat(objectImage.rows(), objectImage.cols(), Highgui.CV_LOAD_IMAGE_COLOR);
         Scalar newKeypointColor = new Scalar(255, 0, 0);
 
@@ -197,7 +207,7 @@ public class KeyPointDetector {
         System.out.println("Drawing matching lines on object image...");
         int matchPointNumber = 0;
         for (int i = 0; i < pts1.size(); i++) {
-            if (outputMask.get(i, 0)[0] == 0.0) continue;
+            if (outputMask.get(i, 0)[0] != 0.0) continue;
             Core.line(
                     objectImage,
                     pts1.get(i),
@@ -243,18 +253,4 @@ public class KeyPointDetector {
     }
 
 
-    /**
-     *<h1>Sorting the Key Points</h1>
-     *
-     */
-    public class AnglesCompare implements Comparator<Angles> {
-
-        public int compare(Angles o1, Angles o2) {
-
-            if (o1.getAngle() < o2.getAngle()) return -1;
-            if (o1.getAngle() == o2.getAngle()) return 0;
-            return 1;
-
-        }
-    }
 }

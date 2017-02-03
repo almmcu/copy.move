@@ -116,9 +116,13 @@ public class CosineSimilarity2 {
 
          System.out.println("counterPoint = " + counterPoint);
          System.out.println("match point number RANSAC = " + matchPointNumber);
-         return counterPoint;
+         return matchPointNumber;
     }
 
+    /**
+     *<h1>Sorting the Key Points</h1>
+     *
+     */
     public class AnglesCompare implements Comparator<Angles> {
 
         public int compare(Angles o1, Angles o2) {

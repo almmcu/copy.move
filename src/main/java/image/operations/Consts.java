@@ -25,7 +25,7 @@ public class Consts {
      */
     public static final String IMAGE_PATH = "\\Pictures\\068_F.jpg";
 
-    public static final String IMAGE_PATH_OUTPUT = "\\Pictures\\OUTPUT_000_F.jpg";
+    public static final String IMAGE_PATH_OUTPUT = "\\Pictures\\OUTPUT_000_F";
 
    /**
      * {@value #IMAGE_PATH_098} Holds the path of the images
@@ -38,8 +38,8 @@ public class Consts {
      * {@value #IMAGE_PATH_OUTPUT_098} Holds the path of the output image
      * CoMoFod picture number 98 - Birds
      */
-    public static final String IMAGE_PATH_OUTPUT_098 = "\\Pictures\\OUTPUT_098_F.jpg";
-    public static final String IMAGE_PATH_OUTPUT_098_C = "\\Pictures\\OUTPUT_098_F_C.jpg";
+    public static final String IMAGE_PATH_OUTPUT_098 = "\\Pictures\\OUTPUT_098_F";
+    public static final String IMAGE_PATH_OUTPUT_098_C = "\\Pictures\\OUTPUT_098_F_C";
 
 
 
@@ -53,7 +53,7 @@ public class Consts {
       * {@value #IMAGE_PATH_OUTPUT_028} Holds the path of the output image
       * CoMoFod picture number 28 - Plants
       */
-     public static final String IMAGE_PATH_OUTPUT_028 = "\\Pictures\\OUTPUT_028_F.jpg";
+     public static final String IMAGE_PATH_OUTPUT_028 = "\\Pictures\\OUTPUT_028_F";
 
 
    /**
@@ -67,7 +67,7 @@ public class Consts {
      * Picture number 18 - Cars
 
      */
-    public static final String IMAGE_PATH_OUTPUT_018 = "\\Pictures\\OUTPUT_018_F.jpg";
+    public static final String IMAGE_PATH_OUTPUT_018 = "\\Pictures\\OUTPUT_018_F";
 
 
      /**
@@ -80,7 +80,7 @@ public class Consts {
       * {@value #IMAGE_PATH_OUTPUT_048} Holds the path of the output image
       * Picture number 48 - Guns
       */
-     public static final String IMAGE_PATH_OUTPUT_048 = "\\Pictures\\OUTPUT_048_F.jpg";
+     public static final String IMAGE_PATH_OUTPUT_048 = "\\Pictures\\OUTPUT_048_F";
 
 
 
