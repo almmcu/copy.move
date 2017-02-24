@@ -102,7 +102,7 @@ public class CosineSimilarity2 {
          System.out.println("Drawing matching lines on object image...");
          int matchPointNumber = 0;
          for (int i = 0; i < pts1.size(); i++) {
-             if (outputMask.get(i, 0)[0] != 0.0) continue;
+             if (outputMask.get(i, 0)[0] == 0.0) continue;
              Core.line(
                      KeyPointDetector.objectImage,
                      pts1.get(i),
